@@ -15,9 +15,9 @@ Copy into your scripts directory (ex. ~/bin)
 Read the comments at the top of each script
 
 # Usage
-gitf <<string>>
+gitf \<string\>
 
-vif <<Drupal function or class method>>
+vif \<Drupal function or class method\>
 
 # Examples
 gitf hello
