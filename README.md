@@ -15,10 +15,13 @@ Copy into your scripts directory (ex. ~/bin)
 Read the comments at the top of each script
 
 # Usage
-gitf <string>
-vif <Drupal function or class method>
+gitf <<string>>
+
+vif <<Drupal function or class method>>
 
 # Examples
 gitf hello
+
 vif user_access
+
 vif view::update
