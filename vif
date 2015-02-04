@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# This script will locate any Drupal function or class method and
+# edit the file at the start line containing that function or method.
+# It will locate core as well as contrib or even custom module
+# functions and methods.
+
+# Preconditions:
+# 1. A Unix-like operating system such as Mac OSX or Linux
+# 2. The current directory must be within a Drupal installation
+# 3. The devel contrib module must be installed and enabled
+# 4. The drush command must be available
+# 5. The vi editor command must be available
+
+if test $1; then
+  drush=$(which drush)
+  vi=$(which vi)
+  file=$($drush --pipe fnv $1 --format='!file +!startline')
+  if [ "$file" != "" ]; then
+    $vi $file
+  fi
+else
+  vif=$(basename $0)
+  echo "Usage: $vif <Drupal function or class method>"
+  echo "Examples: $vif user_access"
+  echo "          $vif view::update"
+fi

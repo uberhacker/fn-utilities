@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# This script will search git logs for authors or commit message strings
+
+# Preconditions:
+# 1. A Unix-like operating system such as Mac OSX or Linux
+# 2. The current directory must be within a git repository
+# 3. The git command must be available
+
+if test $1 ; then
+  git log -i --author="$1" > $HOME/gitf.txt
+  git log -i --grep="$1" >> $HOME/gitf.txt
+  if [ -s "$HOME/gitf.txt" ]; then
+    less $HOME/gitf.txt
+  fi
+  rm -f $HOME/gitf.txt
+else
+  echo "Usage: gitf <string>"
+fi
