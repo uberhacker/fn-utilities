@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# This script resets the Drupal login password of the user specified.
+# If no user is provided, the default is the name of uid 1.
+
+# Preconditions:
+# 1. A Unix-like operating system such as Mac OSX or Linux
+# 2. The current directory must be within a Drupal installation
+# 3. The junk command must be available
+
+DRUSH=$(which drush)
+if [ $? == 1 ]; then
+  exit
+fi
+if test $1; then
+  if test $2; then
+    name=$2
+  else
+    name=$($DRUSH uinf --fields=name --pipe)
+  fi
+  $DRUSH upwd $name --password="$1"
+else
+  echo ""
+  echo "Purpose:"
+  echo "Resets the Drupal login password of the user specified."
+  echo "If no user is provided, the default is the name of uid 1."
+  echo ""
+  echo "Usage:"
+  echo "dprf <password> [<user>]"
+  echo ""
+  echo "Examples:"
+  echo "dprf admin - Reset the password of uid 1 to admin"
+  echo "dprf secret bob - Reset the password of user bob to secret"
+  echo ""
+fi

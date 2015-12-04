@@ -1,10 +1,13 @@
 # fn-utilities
 "F-n" or "f end" amazing utilities
 
-gitf - This script will search git logs for authors or commit message strings
+dprf - Resets the Drupal login password of the user specified.
+       If no user is provided, the default is the name of uid 1.
 
-vif - This script will locate any Drupal function or class method and
-      edit the file at the start line containing that function or method.
+gitf - Search git logs for authors or commit message strings.
+
+vif - Locate any Drupal function or class method and edit the
+      file at the start line containing that function or method.
       It will locate core as well as contrib or even custom module
       functions and methods.
 
@@ -15,11 +18,17 @@ Copy into your scripts directory (ex. ~/bin)
 Read the comments at the top of each script
 
 # Usage
+dprf \<password\> \[\<user\>\]
+
 gitf \<string\>
 
 vif \<Drupal function or class method\>
 
 # Examples
+dprf admin
+
+dprf secret bob
+
 gitf hello
 
 vif user_access
