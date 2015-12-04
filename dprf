@@ -16,7 +16,7 @@ if test $1; then
   if test $2; then
     name=$2
   else
-    name=$($DRUSH uinf --fields=name --pipe)
+    name=$($DRUSH uinf --fields=name --pipe 1)
   fi
   $DRUSH upwd $name --password="$1"
 else
