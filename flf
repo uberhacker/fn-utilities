@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This script simply locates files with a size larger than # megabytes.
+# This is great when you want to free space and get rid of temporary
+# files like core dumps and other residue using up valuable disk space.
+
+# Preconditions:
+# 1. A Unix-like operating system such as Mac OSX or Linux
+# 2. An account with sudo access privileges
+
+if [[ $1 == ?(-)+([0-9]) ]]; then
+  sudo find / -type f -size +$1M -exec du -h {} \; 2> /dev/null | sort -h
+else
+  echo ""
+  echo "Find large files greater than #"
+  echo ""
+  echo "Usage: $0 #"
+  echo "       where # is the size in megabytes"
+  echo ""
+fi
