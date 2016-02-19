@@ -10,7 +10,8 @@
 
 DRUSH=$(which drush)
 if [ $? == 1 ]; then
-  exit
+  echo "Drush is not installed.  See http://www.drush.org/en/master/install."
+  exit 1
 fi
 if test $1; then
   if test $2; then
@@ -19,17 +20,18 @@ if test $1; then
     name=$($DRUSH uinf --fields=name --pipe 1)
   fi
   $DRUSH upwd $name --password="$1"
+  exit $?
 else
+  DPRF=$(basename $0)
   echo ""
-  echo "Purpose:"
   echo "Resets the Drupal login password of the user specified."
   echo "If no user is provided, the default is the name of uid 1."
   echo ""
   echo "Usage:"
-  echo "dprf <password> [<user>]"
+  echo "  $DPRF <password> [<user>]"
   echo ""
   echo "Examples:"
-  echo "dprf admin - Reset the password of uid 1 to admin"
-  echo "dprf secret bob - Reset the password of user bob to secret"
+  echo "  $DPRF admin - Reset the password of uid 1 to admin"
+  echo "  $DPRF secret bob - Reset the password of user bob to secret"
   echo ""
 fi

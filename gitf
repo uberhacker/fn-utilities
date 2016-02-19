@@ -7,7 +7,7 @@
 # 2. The current directory must be within a git repository
 # 3. The git command must be available
 
-if test $1 ; then
+if test $1; then
   git log -i --author="$1" > $HOME/gitf.txt
   git log -i --grep="$1" >> $HOME/gitf.txt
   if [ -s "$HOME/gitf.txt" ]; then
@@ -15,5 +15,11 @@ if test $1 ; then
   fi
   rm -f $HOME/gitf.txt
 else
-  echo "Usage: gitf <string>"
+  GITF=$(basename 0)
+  echo ""
+  echo "Search git logs for authors or commit message strings"
+  echo ""
+  echo "Usage:"
+  echo "  $GITF <string>"
+  echo ""
 fi

@@ -11,10 +11,12 @@
 if [[ $1 == ?(-)+([0-9]) ]]; then
   sudo find / -type f -size +$1M -exec du -h {} \; 2> /dev/null | sort -h
 else
+  FLF=$(basename $0)
   echo ""
   echo "Find large files greater than #"
   echo ""
-  echo "Usage: $0 #"
-  echo "       where # is the size in megabytes"
+  echo "Usage:"
+  echo "  $FLF #"
+  echo "  where # is the size in megabytes"
   echo ""
 fi

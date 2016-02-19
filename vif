@@ -13,15 +13,31 @@
 # 5. The vi editor command must be available
 
 if test $1; then
-  drush=$(which drush)
-  vi=$(which vi)
-  file=$($drush --pipe fnv $1 --format='!file +!startline')
-  if [ "$file" != "" ]; then
-    $vi $file
+  DRUSH=$(which drush)
+  if [ $? == 1 ]; then
+    echo "Drush is not installed.  See http://www.drush.org/en/master/install."
+    exit 1
+  fi
+  VI=$(which vi)
+  if [ $? == 1 ]; then
+    echo "The vi editor is not installed."
+    exit 1
+  fi
+  FILE=$($DRUSH --pipe fnv $1 --format='!file +!startline')
+  if [ $? == 1 ]; then
+    exit 1
+  fi
+  if [ ! -z "$FILE" ]; then
+    $VI $FILE
   fi
 else
-  vif=$(basename $0)
-  echo "Usage: $vif <Drupal function or class method>"
-  echo "Examples: $vif user_access"
-  echo "          $vif view::update"
+  VIF=$(basename $0)
+  echo ""
+  echo "Usage:"
+  echo "  $VIF <Drupal function or class method>"
+  echo ""
+  echo "Examples:"
+  echo "  $VIF user_access"
+  echo "  $VIF view::update"
+  echo ""
 fi
